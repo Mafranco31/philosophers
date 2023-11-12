@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 10:05:39 by mafranco          #+#    #+#             */
-/*   Updated: 2023/11/09 17:41:27 by mafranco         ###   ########.fr       */
+/*   Updated: 2023/11/13 00:12:16 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,19 +49,17 @@ int	freephilo(t_philo *p, int i, t_data *d)
 	while (i > 0)
 	{
 		temp = p;
-		p = p->next;	
+		p = p->next;
 		free(temp);
 		i--;
 	}
 	return (-1);
 }
 
-int	initphilo(t_data *d, t_philo *p)
+int	initphilo(t_data *d, t_philo *p, int i)
 {
-	int	i;
 	t_philo	*first;
 
-	i = 1;
 	first = p;
 	while (i < d->nb_phi)
 	{
@@ -101,7 +99,7 @@ int	initdata(int argc, char **argv, t_philo *p)
 		return (errormessage(d, p));
 	if (initarg(d, argc, argv) == -1)
 		return (errormessage(d, p));
-	if (initphilo(d, p) == -1)
+	if (initphilo(d, p, 1) == -1)
 		return (errormessage(d, p));
 	return (0);
 }

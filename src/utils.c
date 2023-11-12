@@ -6,31 +6,15 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:23:33 by mafranco          #+#    #+#             */
-/*   Updated: 2023/11/09 15:43:58 by mafranco         ###   ########.fr       */
+/*   Updated: 2023/11/13 00:23:59 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
-/*
-void	ft_sleep(long time, void *data)
-{
-	long	i;
-	t_data	*d;
-
-	d = (t_data *)data;
-	i = ft_time();
-	while (d->death == 1)
-	{
-		if (ft_time() - i >= time)
-			return ;
-		usleep(50);
-	}
-	
-}*/
 
 void	freeall(t_philo *p)
 {
-	int	i;
+	int		i;
 	t_philo	*temp;
 
 	i = p->d->nb_phi;
@@ -44,11 +28,28 @@ void	freeall(t_philo *p)
 	}
 }
 
+void	philo_sleep(long time_to_wait, long first_time)
+{
+	long	i;
+
+	i = ft_time();
+	if (i == -1)
+	{
+		while (i == -1)
+			i = ft_time();
+	}		
+	while (i - first_time <= time_to_wait)
+	{
+		usleep(10);
+		i = ft_time();
+	}
+}
+
 int	ft_atoi(const char *ptr)
 {
 	long long	res;
-	int	i;
-	int	neg;
+	int			i;
+	int			neg;
 
 	i = 0;
 	neg = 1;
@@ -72,11 +73,11 @@ int	ft_atoi(const char *ptr)
 	return (res * neg);
 }
 
-long	ft_time()
+long	ft_time(void)
 {
-
 	struct timeval	time;
 
-	gettimeofday(&time, NULL);	//	gerer l erreur
+	if (gettimeofday(&time, NULL) == -1)
+		return (-1);
 	return (time.tv_sec * 1000000 + time.tv_usec);
 }

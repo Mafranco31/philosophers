@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 13:33:32 by mafranco          #+#    #+#             */
-/*   Updated: 2023/11/12 23:53:44 by mafranco         ###   ########.fr       */
+/*   Updated: 2023/11/13 00:20:34 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	freemutex(t_philo *p, int i, int nb)
 
 int	makemutex(t_philo *p)
 {
-	int	i;
+	int		i;
 	t_philo	*first;
 
 	first = p;
@@ -52,13 +52,11 @@ int	makemutex(t_philo *p)
 	return (0);
 }
 
-int	makepthread(t_philo *p)
+int	makepthread(t_philo *p, int i)
 {
-	int	i;
 	t_philo	*first;
 
 	first = p;
-	i = 0;
 	p->d->first_time = ft_time();
 	while (i < p->d->nb_phi)
 	{
@@ -87,7 +85,7 @@ int	ft_pthread_make(t_philo *p)
 {
 	if (makemutex(p) == -1)
 		return (-1);
-	if (makepthread(p) == -1)
+	if (makepthread(p, 0) == -1)
 		return (-1);
 	return (0);
 }

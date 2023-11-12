@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 14:09:51 by mafranco          #+#    #+#             */
-/*   Updated: 2023/11/12 23:56:29 by mafranco         ###   ########.fr       */
+/*   Updated: 2023/11/13 00:19:08 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,9 @@ void	philo_write(t_philo *p, char *str)
 	if (p->d->death == 0)
 	{
 		printf("%ld ", (ft_time() - p->d->first_time) / 1000);
-		printf("%d %s\n",  p->num, str);
+		printf("%d %s\n", p->num, str);
 	}
 	pthread_mutex_unlock(&p->d->mut_writing);
-}
-
-void	philo_sleep(long time_to_wait, long firsttime)
-{
-	long	i;
-
-	i = ft_time();
-	while (i - firsttime <= time_to_wait)
-	{
-		usleep(10);
-		i = ft_time();
-	}
 }
 
 void	philo_eat(t_philo *p, t_philo *next)
@@ -49,6 +37,13 @@ void	philo_eat(t_philo *p, t_philo *next)
 	p->nb_eat++;
 	pthread_mutex_unlock(&next->fork);
 	pthread_mutex_unlock(&p->fork);
+}
+
+void	philo_end_eat(t_philo *p)
+{
+	philo_write(p, "is sleeping");
+	philo_sleep(p->d->t_sleep, p->last_eat + p->d->t_eat);
+	philo_write(p, "is thinking");
 }
 
 void	*philo_action(void *philo)
@@ -73,11 +68,7 @@ void	*philo_action(void *philo)
 		if ((p->d->times_eat > 0 && p->nb_eat >= p->d->times_eat))
 			p->win = 1;
 		else
-		{
-			philo_write(p, "is sleeping");
-			philo_sleep(p->d->t_sleep, p->last_eat + p->d->t_eat);
-			philo_write(p, "is thinking");
-		}
+			philo_end_eat(p);
 	}
 	return (NULL);
 }
@@ -85,9 +76,9 @@ void	*philo_action(void *philo)
 void	*check_death(void *philo)
 {
 	t_philo	*p;
-	int	die;
-	int	win;
-	int	nb;
+	int		die;
+	int		win;
+	int		nb;
 
 	p = (t_philo *)philo;
 	die = 0;
