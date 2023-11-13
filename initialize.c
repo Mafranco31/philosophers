@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 10:05:39 by mafranco          #+#    #+#             */
-/*   Updated: 2023/11/13 00:49:54 by mafranco         ###   ########.fr       */
+/*   Updated: 2023/11/13 21:20:37 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ int	initarg(t_data *d, int argc, char **argv)
 {
 	d->win = 0;
 	d->death = 0;
-	d->nb_phi = ft_atoi(argv[1]);
-	d->t_die = ft_atoi(argv[2]) * 1000;
-	d->t_eat = ft_atoi(argv[3]) * 1000;
-	d->t_sleep = ft_atoi(argv[4]) * 1000;
+	d->nb_phi = getdata(argv[1]);
+	d->t_die = getdata(argv[2]) * 1000;
+	d->t_eat = getdata(argv[3]) * 1000;
+	d->t_sleep = getdata(argv[4]) * 1000;
 	if (argc == 5)
 		d->times_eat = -1;
 	else
-		d->times_eat = ft_atoi(argv[5]);
+		d->times_eat = getdata(argv[5]);
 	if (d->nb_phi > 1 && d->t_die >= 0 && d->t_eat >= 0 && d->t_sleep >= 0
 		&& (argc == 5 || (argc == 6 && d->times_eat > 0)))
 		return (0);

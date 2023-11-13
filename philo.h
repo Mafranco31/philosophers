@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 09:30:30 by mafranco          #+#    #+#             */
-/*   Updated: 2023/11/13 00:17:25 by mafranco         ###   ########.fr       */
+/*   Updated: 2023/11/13 21:19:40 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ typedef struct s_data
 {
 	int				win;
 	int				death;
-	int				nb_phi;
 	int				times_eat;
+	long			nb_phi;
 	long			t_die;
 	long			t_eat;
 	long			t_sleep;
@@ -51,7 +51,7 @@ typedef struct s_philo
 
 int		initdata(int argc, char **argv, t_philo *p);
 
-int		ft_atoi(const char *str);
+long	getdata(const char *ptr);
 
 long	ft_time(void);
 

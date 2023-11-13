@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 10:23:33 by mafranco          #+#    #+#             */
-/*   Updated: 2023/11/13 00:30:58 by mafranco         ###   ########.fr       */
+/*   Updated: 2023/11/13 21:20:00 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ void	philo_sleep(long time_to_wait, long first_time)
 	}
 }
 
-int	ft_atoi(const char *ptr)
+long	ft_atoi(const char *ptr)
 {
-	long long	res;
+	long		res;
 	int			i;
 	int			neg;
 
@@ -71,6 +71,23 @@ int	ft_atoi(const char *ptr)
 		i++;
 	}
 	return (res * neg);
+}
+
+long	getdata(const char *ptr)
+{
+	long	nb;
+	int		i;
+
+	i = 0;
+	while (ptr[i] < 48 || ptr[i] > 57)
+		i++;
+	i = 0;
+	while (ptr[i])
+		i++;
+	nb = ft_atoi(ptr);
+	if (nb < 0 || i > 10 || nb > 2147483647)
+		return (-1);
+	return (nb);
 }
 
 long	ft_time(void)
