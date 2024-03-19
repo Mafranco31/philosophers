@@ -6,7 +6,7 @@
 /*   By: mafranco <mafranco@student.barcelona.>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:57:52 by mafranco          #+#    #+#             */
-/*   Updated: 2024/03/08 20:39:54 by mafranco         ###   ########.fr       */
+/*   Updated: 2024/03/19 09:39:24 by mafranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	philo_spend_time(long time_to_wait, long first_time)
 	i = ft_time();
 	while (i - first_time <= time_to_wait)
 	{
-		usleep(10);
+		usleep(200);
 		i = ft_time();
 	}	
 }
